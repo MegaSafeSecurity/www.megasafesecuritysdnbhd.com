@@ -415,13 +415,13 @@
                     <option>Events</option>
                     <option>Other</option>
                 </select>
-                <input name="guards" type="number" min="1" step="1" placeholder="Estimated Number of Guards Required">
+                <input name="guards" placeholder="Estimated Number of Guards Required">
                 <input name="startDate" type="date">
                 <textarea name="message" rows="4" placeholder="Security Requirements / Scope of Work"></textarea>
                 <div class="quote-actions">
                     <button class="btn btn-primary" id="waQuote" type="button">Send via WhatsApp</button>
                     <button class="btn btn-dark" id="emailQuote" type="button">Send via Email</button>
-                    <a class="btn btn-outline" id="https://docs.google.com/forms/d/e/1FAIpQLScGU1SI63vtUNeOMnzJBrd8ejOaLDbH5fE3NGF37jJF5uKCSA/viewform?usp=dialog" href="#" target="_blank" rel="noopener">Open Google Form</a>
+                    <a class="btn btn-outline" id="googleFormLink" href="#" target="_blank" rel="noopener">Open Google Form</a>
                 </div>
                 <small class="form-note">Complete this form to prepare your enquiry. You can send it via WhatsApp or email, or use the embedded Google Form below once the official form link has been configured.</small>
             </form>
@@ -482,7 +482,7 @@
 <script>
 // Paste the published Google Forms responder URL here (usually ending in /viewform).
 // The uploaded XLSX is a question template, not a live Google Form URL.
-const GOOGLE_FORM_URL = "";
+const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScGU1SI63vtUNeOMnzJBrd8ejOaLDbH5fE3NGF37jJF5uKCSA/viewform?usp=dialog";
 const toggle=document.querySelector('.menu-toggle'),nav=document.querySelector('.nav-links');
 toggle.onclick=()=>nav.classList.toggle('open');
 document.querySelectorAll('.nav-links a').forEach(a=>a.onclick=()=>nav.classList.remove('open'));
@@ -511,7 +511,7 @@ if(GOOGLE_FORM_URL && /^https:\/\/docs\.google\.com\/forms\//i.test(GOOGLE_FORM_
 const aiFab=document.getElementById('aiFab'),aiPanel=document.getElementById('aiPanel'),aiClose=document.getElementById('aiClose'),aiBody=document.getElementById('aiBody'),aiForm=document.getElementById('aiForm'),aiInput=document.getElementById('aiInput');
 aiFab.onclick=()=>{aiPanel.classList.add('show');aiPanel.setAttribute('aria-hidden','false');aiInput.focus()};
 aiClose.onclick=()=>{aiPanel.classList.remove('show');aiPanel.setAttribute('aria-hidden','true')};
-function reply(q){let s=q.toLowerCase();if(s.includes('service')||s.includes('guard')||s.includes('security'))return 'Mega Safe provides professional security guards, patrols and monitoring, access and visitor control, site security, event security, government facility security, industrial and construction security, and security supervision.';if(s.includes('government'))return 'For government requirements, we can provide professional guarding support, access control, patrols, reporting, and facility security. Please use the Request a Quotation section to share your requirements.';if(s.includes('quotation')||s.includes('quote')||s.includes('price'))return 'Please complete the Quotation Request form. You can send it via WhatsApp or email, or use the official Google Form when it is configured.';if(s.includes('portfolio')||s.includes('profile'))return 'The Company Portfolio is available in the Media section. You can view the company profile in PDF format.';return 'Thank you for your enquiry. For an accurate security proposal, please provide the location, premises type, estimated number of guards, and preferred service start date.'}
+function reply(q){let s=q.toLowerCase();if(s.includes('service')||s.includes('guard')||s.includes('security'))return 'Mega Safe provides professional security guards, patrols and monitoring, access and visitor control, site security, event security, government facility security, industrial and construction security, and security supervision.';if(s.includes('government'))return 'For government requirements, we can provide professional guarding support, access control, patrols, reporting, and facility security. Please use the Request a Quotation section to share your requirements.';if(s.includes('quotation')||s.includes('quote')||s.includes('price'))return 'Please complete the Quotation Request form. You can send it via WhatsApp or email, or use the official Google Form embedded on our website.';if(s.includes('portfolio')||s.includes('profile'))return 'The Company Portfolio is available in the Media section. You can view the company profile in PDF format.';return 'Thank you for your enquiry. For an accurate security proposal, please provide the location, premises type, estimated number of guards, and preferred service start date.'}
 function addMsg(t,who){let d=document.createElement('div');d.className='ai-msg '+who;d.textContent=t;aiBody.appendChild(d);aiBody.scrollTop=aiBody.scrollHeight}
 function ask(q){addMsg(q,'user');setTimeout(()=>addMsg(reply(q),'bot'),250)}
 aiForm.onsubmit=e=>{e.preventDefault();let q=aiInput.value.trim();if(q){ask(q);aiInput.value=''}};
