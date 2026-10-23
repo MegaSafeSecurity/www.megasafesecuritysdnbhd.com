@@ -351,8 +351,8 @@
                 <p>Contact Mega Safe directly or submit a quotation request. Client information will be organised to simplify follow-up.</p>
             </div>
             <div class="quick-contact-actions">
-                <a class="btn btn-primary" href="https://wa.me/60163639789" target="_blank" rel="noopener">WhatsApp Us</a>
-                <a class="btn btn-dark" href="mailto:megasafe.my@gmail.com?subject=Quotation%20Request%20-%20Mega%20Safe">Email Us</a>
+                <a class="btn btn-primary" href="https://wa.me/60109142789" target="_blank" rel="noopener">WhatsApp Us</a>
+                <a class="btn btn-dark" href="mailto:mymegasafe.security@gmail.com?subject=Quotation%20Request%20-%20Mega%20Safe">Email Us</a>
                 <a class="btn btn-outline" href="#contact">Request a Quote</a>
             </div>
         </div>
@@ -422,7 +422,7 @@
                 <div class="quote-actions">
                     <button class="btn btn-primary" id="waQuote" type="button">Send via WhatsApp</button>
                     <button class="btn btn-dark" id="emailQuote" type="button">Send via Email</button>
-                    <a class="btn btn-outline" id="googleFormLink" href="#" target="https://megasafesecurity.github.io/www.megasafesecuritysdnbhd.com/" rel="noopener">Open Google Form</a>
+                    <a class="btn btn-outline" id="googleFormLink" href="#" target="https://docs.google.com/forms/d/e/1FAIpQLSdU0kOfK6Ei37davUNTnPIyMTD1TE1q_Mn7QYds8PnDGVcQQw/viewform?usp=dialog" rel="noopener">Open Google Form</a>
                 </div>
                 <small class="form-note">Complete this form to prepare your enquiry. You can send it via WhatsApp or email, or use the embedded Google Form below once the official form link has been configured.</small>
             </form>
@@ -526,7 +526,7 @@ Estimated Guards: ${d.guards}
 Start Date: ${d.startDate}
 Security Requirements: ${d.message}`}
 
-document.getElementById('waQuote').onclick=()=>{if(!form.reportValidity())return;const d=quoteData();window.open('https://wa.me/60163639789?text='+encodeURIComponent(quoteText(d)),'_blank')};
+document.getElementById('waQuote').onclick=()=>{if(!form.reportValidity())return;const d=quoteData();window.open('https://wa.me/60109142789?text='+encodeURIComponent(quoteText(d)),'_blank')};
 document.getElementById('emailQuote').onclick=()=>{if(!form.reportValidity())return;const d=quoteData();window.location.href='mailto:megasafe.my@gmail.com?subject='+encodeURIComponent('Quotation Request - '+d.company)+'&body='+encodeURIComponent(quoteText(d))};
 </script>
 </body></html>
