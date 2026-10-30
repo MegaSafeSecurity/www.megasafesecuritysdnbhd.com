@@ -99,3 +99,95 @@ body { overflow-x: clip; }
   *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
   .reveal { opacity:1 !important; transform:none !important; }
 }
+
+
+/* Hero typography, organisation chart and management card interactions */
+.hero-content { perspective: 1100px; transform-style: preserve-3d; }
+.hero-badge { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.hero-badge-part, .hero-badge-divider, .hero-est span, .hero-title-line, .hero-summary, .hero-action-wrap, .trust-row span {
+  opacity: 0;
+  animation: hero-copy-reveal .82s cubic-bezier(.18,.78,.22,1) var(--hero-delay, 0ms) both;
+  transform-origin: 50% 100%;
+  backface-visibility: hidden;
+}
+.hero-badge-part { --hero-delay: 80ms; }
+.hero-badge-part:last-child { --hero-delay: 180ms; }
+.hero-badge-divider { --hero-delay: 130ms; color: rgba(242,207,98,.8); }
+.hero-est { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 0 0 18px; color: #d8d4c7; font-size: 11px; font-weight: 800; letter-spacing: 2.4px; }
+.hero-est span:first-child { --hero-delay: 240ms; }
+.hero-est .hero-est-year { --hero-delay: 320ms; color: var(--gold-bright); }
+.hero-title-line { display: block; --hero-delay: 390ms; }
+.hero-title-highlight { --hero-delay: 490ms; }
+.hero-summary { --hero-delay: 590ms; }
+.hero-action-wrap:first-child { --hero-delay: 680ms; }
+.hero-action-wrap:last-child { --hero-delay: 760ms; }
+.trust-row span:nth-child(1) { --hero-delay: 850ms; }
+.trust-row span:nth-child(2) { --hero-delay: 920ms; }
+.trust-row span:nth-child(3) { --hero-delay: 990ms; }
+@keyframes hero-copy-reveal {
+  from { opacity: 0; transform: translate3d(0, 24px, -18px) rotateX(-24deg); filter: blur(5px); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) rotateX(0); filter: blur(0); }
+}
+.org-image-wrap {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  box-shadow: 0 18px 45px rgba(0,0,0,.22);
+  transition: transform .65s var(--ease-out), box-shadow .65s ease;
+}
+.org-image-wrap.reveal.is-visible { animation: org-chart-arrive .95s cubic-bezier(.2,.8,.2,1) both; }
+.org-image-wrap img {
+  transform: translateZ(0) scale(.985);
+  transform-origin: center;
+  transition: transform .75s var(--ease-out), filter .6s ease;
+  filter: saturate(.94) contrast(1.015);
+}
+.org-image-wrap:hover { transform: translateY(-5px) rotateX(1deg); box-shadow: 0 28px 65px rgba(0,0,0,.3); }
+.org-image-wrap:hover img { transform: translateZ(14px) scale(1.012); filter: saturate(1.04) contrast(1.02); }
+@keyframes org-chart-arrive {
+  from { opacity: 0; transform: perspective(1200px) translateY(30px) rotateX(8deg) scale(.97); }
+  to { opacity: 1; transform: perspective(1200px) translateY(0) rotateX(0) scale(1); }
+}
+.person { position: relative; transform-style: preserve-3d; transition: transform .72s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease, border-color .3s ease; }
+.person > * { backface-visibility: hidden; }
+.person::after {
+  content: attr(data-role) "\A" "VIEW PROFILE";
+  position: absolute;
+  inset: 16px;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid rgba(242,207,98,.42);
+  border-radius: 10px;
+  background: radial-gradient(circle at 50% 0%, rgba(214,170,37,.2), transparent 65%), linear-gradient(145deg,#222325,#101113);
+  color: var(--gold-bright);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  line-height: 1.5;
+  text-align: center;
+  white-space: pre-line;
+  opacity: 0;
+  transform: rotateY(180deg) translateZ(3px);
+  backface-visibility: hidden;
+  transition: opacity .2s ease .12s;
+}
+.person.is-flipped { transform: perspective(900px) rotateX(0) rotateY(180deg) translateY(-3px); border-color: var(--gold); box-shadow: 0 25px 55px rgba(0,0,0,.4), 0 0 28px rgba(214,170,37,.12); }
+.person.is-flipped::after { opacity: 1; }
+@media(max-width:700px) {
+  .hero-badge { align-items: flex-start; border-radius: 14px; }
+  .hero-est { gap: 7px; font-size: 10px; letter-spacing: 1.7px; }
+  .org-image-wrap:hover { transform: none; }
+  .org-image-wrap:hover img { transform: none; }
+  .person.is-flipped { transform: perspective(900px) rotateY(180deg); }
+}
+.hero h1 .hero-title-line:not(.hero-title-highlight) {
+  background: none;
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  background-clip: border-box;
+  -webkit-background-clip: border-box;
+}
+.hero-action-wrap { display: inline-flex; }
