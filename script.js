@@ -15,8 +15,28 @@ document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click
 }));
 
 const modal=document.getElementById('personModal');
-document.querySelectorAll('.person').forEach(b=>b.onclick=()=>{modal.classList.add('show');modal.querySelector('#modalNama').textContent=b.dataset.name;modal.querySelector('#modalRole').textContent=b.dataset.role;modal.querySelector('#modalInfo').textContent=b.dataset.info;modal.querySelector('#modalAvatar').textContent=b.querySelector('.avatar').textContent});
-const closePersonModal = () => modal.classList.remove('show');
+let activePerson = null;
+let personFlipTimer;
+const openPersonModal = person => {
+  modal.classList.add('show');
+  modal.querySelector('#modalNama').textContent = person.dataset.name;
+  modal.querySelector('#modalRole').textContent = person.dataset.role;
+  modal.querySelector('#modalInfo').textContent = person.dataset.info;
+  modal.querySelector('#modalAvatar').textContent = person.querySelector('.avatar').textContent;
+};
+document.querySelectorAll('.person').forEach(person => person.addEventListener('click', () => {
+  window.clearTimeout(personFlipTimer);
+  if (activePerson && activePerson !== person) activePerson.classList.remove('is-flipped');
+  activePerson = person;
+  person.classList.add('is-flipped');
+  if (reduceMotion) openPersonModal(person);
+  else personFlipTimer = window.setTimeout(() => openPersonModal(person), 720);
+}));
+const closePersonModal = () => {
+  modal.classList.remove('show');
+  if (activePerson) activePerson.classList.remove('is-flipped');
+  activePerson = null;
+};
 document.querySelector('.modal-close').addEventListener('click', closePersonModal);
 modal.addEventListener('click', e => { if (e.target === modal) closePersonModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePersonModal(); });
@@ -58,7 +78,7 @@ document.getElementById('emailQuote').onclick=()=>{if(!form.reportValidity())ret
 /* Motion, 3D tilt, reveal-on-scroll and back-to-top enhancements */
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const revealTargets = document.querySelectorAll(
-  '.section .container > .eyebrow, .info-tile, .card, .person, .industry-grid > div, .project-grid article, .media-card, .credential-grid > div, .vm-card, .branch-card, .contact-card, .bulletin-gallery figure'
+  '.section .container > .eyebrow, .info-tile, .card, .person, .industry-grid > div, .project-grid article, .media-card, .credential-grid > div, .vm-card, .branch-card, .contact-card, .bulletin-gallery figure, .org-image-wrap'
 );
 revealTargets.forEach((el, index) => {
   el.classList.add('reveal');
