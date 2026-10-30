@@ -191,3 +191,35 @@ body { overflow-x: clip; }
   -webkit-background-clip: border-box;
 }
 .hero-action-wrap { display: inline-flex; }
+
+
+/* Expandable Vision and Mission panels and company goals */
+.vm-grid { perspective: 1200px; align-items: start; }
+.vm-card { position: relative; z-index: 1; transform-origin: center top; transition: transform .55s cubic-bezier(.2,.8,.2,1), box-shadow .45s ease, border-color .35s ease; }
+.vm-card.is-expanded { grid-column: 1 / -1; z-index: 5; transform: scale(1.025); border-top-color: #f2cf62; box-shadow: 0 28px 70px rgba(15,15,15,.2), 0 0 0 1px rgba(214,170,37,.22); }
+.vm-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0; border: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; }
+.vm-toggle .vm-label { color: var(--gold); font-size: 12px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; }
+.vm-toggle-icon { width: 34px; height: 34px; flex: 0 0 34px; display: grid; place-items: center; border: 1px solid rgba(214,170,37,.45); border-radius: 50%; color: var(--gold); font-size: 24px; line-height: 1; transition: transform .45s cubic-bezier(.2,.8,.2,1), background .35s ease, color .35s ease; }
+.vm-toggle:hover .vm-toggle-icon, .vm-toggle[aria-expanded="true"] .vm-toggle-icon { transform: rotate(135deg); background: var(--gold); color: #fff; }
+.vm-content h2 { margin: 14px 0 14px; font-size: clamp(25px,3vw,38px); transition: font-size .4s ease; }
+.vm-content p, .vm-content li { color: #555b62; font-size: 16px; line-height: 1.8; }
+.vm-content ol { list-style: none; padding-left: 0; }
+.vm-content li { padding-left: 5px; margin: 12px 0; }
+.vm-content li strong { color: #202226; }
+.vm-card.is-expanded .vm-content h2 { font-size: clamp(32px,4vw,48px); }
+.vm-card.is-expanded .vm-content p, .vm-card.is-expanded .vm-content li { font-size: clamp(17px,1.5vw,20px); line-height: 1.85; }
+.goals-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.goal-card { min-height: 225px; }
+.goal-card h3 { font-size: 21px; }
+.goal-card p { font-size: 15px; line-height: 1.75; }
+@media(max-width:900px) {
+  .vm-card.is-expanded { grid-column: 1; transform: scale(1.015); }
+}
+@media(max-width:700px) {
+  .vm-card { padding: 25px; }
+  .vm-card.is-expanded { transform: scale(1); }
+  .vm-content p, .vm-content li { font-size: 15px; }
+  .vm-card.is-expanded .vm-content p, .vm-card.is-expanded .vm-content li { font-size: 17px; }
+  .goals-grid { grid-template-columns: 1fr; }
+  .goal-card { min-height: 0; }
+}
