@@ -41,6 +41,22 @@ document.querySelector('.modal-close').addEventListener('click', closePersonModa
 modal.addEventListener('click', e => { if (e.target === modal) closePersonModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePersonModal(); });
 
+document.querySelectorAll('.vm-toggle').forEach(button => button.addEventListener('click', () => {
+  const card = button.closest('.vm-card');
+  const shouldExpand = !card.classList.contains('is-expanded');
+  document.querySelectorAll('.vm-card').forEach(otherCard => {
+    otherCard.classList.remove('is-expanded');
+    otherCard.querySelector('.vm-toggle').setAttribute('aria-expanded', 'false');
+  });
+  if (shouldExpand) {
+    card.classList.add('is-expanded');
+    button.setAttribute('aria-expanded', 'true');
+    window.requestAnimationFrame(() => card.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      block: 'center'
+    }));
+  }
+}));
 const googleFormLink=document.getElementById('googleFormLink');
 if (googleFormLink && GOOGLE_FORM_URL && /^https:\/\/docs\.google\.com\/forms\//i.test(GOOGLE_FORM_URL)) {
   googleFormLink.href = GOOGLE_FORM_URL;
